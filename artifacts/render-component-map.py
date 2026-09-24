@@ -12,11 +12,11 @@ COL_W, ROW_H = 288, 130
 HEADERS = ("TRIGGER", "INPUT", "CONTEXT", "PROCESSING", "OUTPUT")
 ROWS = (
     ("Riya", "Organiser", "Start a trip", "Trip name; currency", "Shared group link", "Create trip; lock choice", "Result and vote tally"),
-    ("Four friends", "Participants", "Open group link", "Origin; dates; budget", "Likes; dealbreakers", "Join; edit privately; vote", "Options and positions"),
+    ("Friends", "Participants", "Open group link", "Origin; dates; budget", "Likes; dealbreakers", "Join; edit privately; vote", "Options and positions"),
     ("Trip Planner", "App", "Responses complete", "Preferences; votes", "Hard constraints; offers", "Check; rank; tally", "Options or conflicts"),
     ("Gemini", "AI service", "Candidate request", "Group preferences", "Dates; destination types", "Suggest; explain", "Structured candidates"),
     ("Supabase", "Data store", "Read or write", "Trips; people; rounds", "Edits; votes; result", "Persist; retrieve", "Current group state"),
-    ("Other API", "Amadeus", "Live offer request", "Origins; dates; places", "Flights; hotels", "Fetch live quotes", "Prices; links; times"),
+    ("Other API", "SerpApi", "Live offer request", "Origins; dates; places", "Flights; hotels", "Fetch live quotes", "Prices; links; times"),
 )
 
 
@@ -31,7 +31,7 @@ parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH * EXPORT_SCALE}" height="{HEIGHT * EXPORT_SCALE}" viewBox="0 0 {WIDTH} {HEIGHT}">',
     '<rect width="1800" height="1273" fill="#f8fafc"/>',
     '<rect x="34" y="34" width="1732" height="1205" rx="30" fill="white" stroke="#dce5ee" stroke-width="2"/>',
-    text(72, 113, "GROUP TRIP PLANNER", 24, "#276d8f", 700),
+    text(72, 113, "TOGETHER · GROUP TRIP PLANNER", 24, "#276d8f", 700),
     text(72, 169, "Component map", 50, "#142138", 700),
     text(72, 211, "From one shared link to a group decision", 25, "#55657a", 400),
     '<rect x="68" y="273" width="1652" height="3" rx="1.5" fill="#dfe8ee"/>',
@@ -80,10 +80,10 @@ parts.extend(
         text(72, 1158, "People → App", 24, "#162840", 600),
         text(390, 1158, "App ↔ Supabase", 24, "#162840", 600),
         text(735, 1158, "App ↔ Gemini", 24, "#162840", 600),
-        text(1045, 1158, "App ↔ Amadeus", 24, "#162840", 600),
+        text(1045, 1158, "App ↔ SerpApi", 24, "#162840", 600),
         text(1400, 1158, "Results → people", 24, "#162840", 600),
         '<line x1="72" y1="1180" x2="1718" y2="1180" stroke="#dfe8ee" stroke-width="2"/>',
-        text(72, 1211, "Amadeus supplies live flight and hotel offers; the app verifies feasibility and shows quote times.", 19, "#63768a", 400),
+        text(72, 1211, "SerpApi supplies live flight and hotel prices; the app verifies feasibility and shows quote times.", 19, "#63768a", 400),
         '</svg>',
     ]
 )

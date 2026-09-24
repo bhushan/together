@@ -7,8 +7,7 @@ test('five people can join, edit, resolve a conflict, vote, lock, and keep prior
   process.env.SUPABASE_URL = 'https://db.example.test';
   process.env.SUPABASE_SECRET_KEY = 'sb_secret_test';
   process.env.GEMINI_API_KEY = 'test';
-  process.env.AMADEUS_CLIENT_ID = 'test';
-  process.env.AMADEUS_CLIENT_SECRET = 'test';
+  process.env.SERPAPI_API_KEY = 'test';
   const rows: Record<string, Record<string, unknown>[]> = { trips: [], members: [], rounds: [], options: [], votes: [] };
   let sequence = 0;
   let failOffers = false;
@@ -37,11 +36,18 @@ test('five people can join, edit, resolve a conflict, vote, lock, and keep prior
       { city: 'Bali', country: 'Indonesia', iata: 'DPS', type: 'beach', reason: 'Warm beaches and varied stays.' },
       { city: 'Singapore', country: 'Singapore', iata: 'SIN', type: 'city', reason: 'Easy city break.' },
     ] }) }] } }] });
-    if (url.pathname.endsWith('/oauth2/token')) return Response.json({ access_token: 'test', expires_in: 1800 });
-    if (failOffers) return new Response('{}', { status: 503 });
-    if (url.pathname.endsWith('/hotels/by-city')) return Response.json({ data: [{ hotelId: 'HOTEL1' }] });
-    if (url.pathname.endsWith('/hotel-offers')) return Response.json({ data: [{ hotel: { name: 'Hotel One' }, offers: [{ price: { total: '500' } }] }] });
-    if (url.pathname.endsWith('/flight-offers')) return Response.json({ data: [{ price: { grandTotal: '300' } }] });
+    if (url.hostname === 'serpapi.com') {
+      assert.equal(url.searchParams.get('api_key'), 'test');
+      if (failOffers) return new Response('{}', { status: 503 });
+      if (url.searchParams.get('engine') === 'google_hotels') {
+        assert.equal(url.searchParams.get('adults'), '5');
+        return Response.json({ properties: [{ name: 'Hotel One', total_rate: { extracted_lowest: 500 } }] });
+      }
+      if (url.searchParams.get('engine') === 'google_flights') {
+        assert.equal(url.searchParams.get('type'), '1');
+        return Response.json({ best_flights: [{ price: 300 }] });
+      }
+    }
     return new Response('{}', { status: 404 });
   };
   try {
@@ -74,7 +80,7 @@ test('five people can join, edit, resolve a conflict, vote, lock, and keep prior
     assert.equal((await post(created.slug, 'generate', tokens[0])).status, 200);
     const failed = await get(created.slug);
     assert.equal(failed.round.status, 'conflict');
-    assert.match(failed.round.issues.join(' '), /Amadeus.*503/);
+    assert.match(failed.round.issues.join(' '), /SerpApi.*503/);
     assert.equal(failed.previousRounds.length, 2);
     assert.equal(failed.previousRounds[0].lockedChoice, 'Bali');
   } finally { globalThis.fetch = originalFetch; }

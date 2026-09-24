@@ -118,7 +118,7 @@ export async function POST(request: Request, context: Params) {
     return reply('Unknown action.');
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unexpected error';
-    const safe = message.includes('not configured') || message.startsWith('Gemini') || message.startsWith('Amadeus') ? message : 'Request failed. Please try again.';
+    const safe = message.includes('not configured') || message.startsWith('Gemini') || message.startsWith('SerpApi') ? message : 'Request failed. Please try again.';
     return reply(safe, 503);
   }
 }
