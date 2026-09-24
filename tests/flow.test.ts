@@ -32,10 +32,13 @@ test('five people can join, edit, resolve a conflict, vote, lock, and keep prior
       const limit = Number(url.searchParams.get('limit'));
       return Response.json(limit ? found.slice(0, limit) : found);
     }
-    if (url.hostname === 'generativelanguage.googleapis.com') return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify({ candidates: [
+    if (url.hostname === 'generativelanguage.googleapis.com') {
+      assert.match(url.pathname, /\/models\/gemini-3\.5-flash-lite:generateContent$/);
+      return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify({ candidates: [
       { city: 'Bali', country: 'Indonesia', iata: 'DPS', type: 'beach', reason: 'Warm beaches and varied stays.' },
       { city: 'Singapore', country: 'Singapore', iata: 'SIN', type: 'city', reason: 'Easy city break.' },
     ] }) }] } }] });
+    }
     if (url.hostname === 'serpapi.com') {
       assert.equal(url.searchParams.get('api_key'), 'test');
       if (failOffers) return new Response('{}', { status: 503 });

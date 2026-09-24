@@ -8,13 +8,13 @@ function required(name: string) {
 
 export async function suggestCandidates(members: MemberInput[], dates: { startDate: string; endDate: string }): Promise<Candidate[]> {
   const prompt = `Suggest 3 distinct real travel destinations with valid three-letter IATA city codes usable for both flight and hotel search. Return only JSON. Group dates: ${dates.startDate} to ${dates.endDate}. Group preferences: ${JSON.stringify(members.map(m => ({ origin: m.origin, budget: m.budget, destinationType: m.destinationType, preferences: m.preferences, dealbreakers: m.dealbreakers, excludedDestinations: m.excludedDestinations })))}. Avoid every excluded destination and dealbreaker. No prices. Keep reason under 140 characters. Types must be one of beach, city, nature, adventure, culture.`;
-  const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', {
+  const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-goog-api-key': required('GEMINI_API_KEY') },
     body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: 'application/json', responseJsonSchema: { type: 'object', properties: { candidates: { type: 'array', items: { type: 'object', properties: { city: { type: 'string' }, country: { type: 'string' }, iata: { type: 'string' }, type: { type: 'string' }, reason: { type: 'string' } }, required: ['city', 'country', 'iata', 'type', 'reason'] } } }, required: ['candidates'] } } }),
     cache: 'no-store', signal: AbortSignal.timeout(20000),
   });
-  if (!response.ok) throw new Error(`Gemini returned ${response.status}. Try a new round later.`);
+  if (!response.ok) throw new Error(`Gemini returned ${response.status}. Check model access or free-tier limits, then try again.`);
   const result = await response.json();
   const raw = result.candidates?.[0]?.content?.parts?.[0]?.text;
   if (!raw) throw new Error('Gemini returned no destinations. Try again.');

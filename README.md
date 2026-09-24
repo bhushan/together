@@ -6,7 +6,7 @@ Create a trip, share its unique group link, and let any number of friends join. 
 
 - Next.js 16 and TypeScript
 - Supabase PostgREST for persistent trips, members, rounds, options, and votes
-- Gemini structured JSON for destination candidates and short explanations
+- Gemini 3.5 Flash-Lite free tier with structured JSON for destination candidates and short explanations
 - SerpApi Google Flights and Hotels APIs for live estimates (free plan)
 
 All keys stay in server environment variables. The public group link lets anyone join and see names, response progress, options, and vote totals. A member's private fragment link is required to edit their response or vote. The organiser's private fragment link is required to generate rounds and lock a choice. Keep private links out of public channels.
