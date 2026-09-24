@@ -31,7 +31,11 @@ export async function GET(request: Request, context: Params) {
     const votes = latest ? await db<Vote[]>('votes', 'GET', `${eq('round_id', latest.id)}&select=member_id,option_id`) : [];
     const tally = Object.fromEntries(options.map(option => [option.id, votes.filter(v => v.option_id === option.id).length]));
     const stale = !!latest && members.some(m => !m.submitted_at || m.submitted_at > latest.created_at || m.created_at > latest.created_at);
-    return NextResponse.json({ title: trip.title, currency: trip.currency, organizer, self: self ? { id: self.id, name: self.name, origin: self.origin, startDate: self.start_date, endDate: self.end_date, budget: self.budget, destinationType: self.destination_type, excludedDestinations: self.excluded_destinations, preferences: self.preferences, dealbreakers: self.dealbreakers, submitted: !!self.submitted_at } : null, members: members.map(m => ({ name: m.name, submitted: !!m.submitted_at })), round: latest ? { ...latest, stale, options, tally, myVote: votes.find(v => v.member_id === self?.id)?.option_id || null } : null, previousRounds: rounds.slice(1).map(r => ({ id: r.id, status: r.status, createdAt: r.created_at })) });
+    const previousRounds = await Promise.all(rounds.slice(1, 11).map(async r => {
+      const chosen = r.locked_option_id ? await one<Option>('options', `${eq('id', r.locked_option_id)}&select=*`) : null;
+      return { id: r.id, status: r.status, createdAt: r.created_at, lockedChoice: chosen?.city || null };
+    }));
+    return NextResponse.json({ title: trip.title, currency: trip.currency, organizer, self: self ? { id: self.id, name: self.name, origin: self.origin, startDate: self.start_date, endDate: self.end_date, budget: self.budget, destinationType: self.destination_type, excludedDestinations: self.excluded_destinations, preferences: self.preferences, dealbreakers: self.dealbreakers, submitted: !!self.submitted_at } : null, members: members.map(m => ({ name: m.name, submitted: !!m.submitted_at })), round: latest ? { ...latest, stale, options, tally, myVote: votes.find(v => v.member_id === self?.id)?.option_id || null } : null, previousRounds });
   } catch { return reply('Could not load the trip. Check the database connection.', 503); }
 }
 

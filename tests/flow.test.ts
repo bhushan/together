@@ -29,7 +29,7 @@ test('five people can join, edit, resolve a conflict, vote, lock, and keep prior
       }
       if (init?.method === 'PATCH') { const body = JSON.parse(String(init.body)); for (const row of found) Object.assign(row, body); return Response.json(found); }
       const order = url.searchParams.get('order');
-      if (order) { const [field, direction] = order.split(',')[0].split('.'); found = [...found].sort((a, b) => String(a[field]).localeCompare(String(b[field])) * (direction === 'desc' ? -1 : 1)); }
+      if (order) { const [field, direction] = order.split(',')[0].split('.'); found = [...found].sort((a, b) => (typeof a[field] === 'number' && typeof b[field] === 'number' ? (a[field] as number) - (b[field] as number) : String(a[field]).localeCompare(String(b[field]))) * (direction === 'desc' ? -1 : 1)); }
       const limit = Number(url.searchParams.get('limit'));
       return Response.json(limit ? found.slice(0, limit) : found);
     }
@@ -71,5 +71,6 @@ test('five people can join, edit, resolve a conflict, vote, lock, and keep prior
     assert.equal(failed.round.status, 'conflict');
     assert.match(failed.round.issues.join(' '), /Amadeus.*503/);
     assert.equal(failed.previousRounds.length, 2);
+    assert.equal(failed.previousRounds[0].lockedChoice, 'Bali');
   } finally { globalThis.fetch = originalFetch; }
 });
