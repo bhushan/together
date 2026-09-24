@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3600" height="2546" viewBox="0 0 1800 1273">
+<rect width="1800" height="1273" fill="#f8fafc"/>
+<rect x="34" y="34" width="1732" height="1205" rx="30" fill="white" stroke="#dce5ee" stroke-width="2"/>
+<text x="72" y="113" fill="#276d8f" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="start">GROUP TRIP PLANNER</text>
+<text x="72" y="169" fill="#142138" font-family="Arial, Helvetica, sans-serif" font-size="50" font-weight="700" text-anchor="start">Component map</text>
+<text x="72" y="211" fill="#55657a" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="400" text-anchor="start">From one shared link to a group decision</text>
+<rect x="68" y="273" width="1652" height="3" rx="1.5" fill="#dfe8ee"/>
+<text x="310" y="262" fill="#46758a" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="start">TRIGGER</text>
+<text x="598" y="262" fill="#46758a" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="start">INPUT</text>
+<text x="886" y="262" fill="#46758a" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="start">CONTEXT</text>
+<text x="1174" y="262" fill="#46758a" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="start">PROCESSING</text>
+<text x="1462" y="262" fill="#46758a" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="start">OUTPUT</text>
+<rect x="68" y="280" width="1652" height="130" fill="#f5f9fb"/>
+<rect x="68" y="280" width="6" height="130" fill="#1687a8"/>
+<text x="94" y="333" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="start">Riya</text>
+<text x="94" y="363" fill="#687b8e" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="start">Organiser</text>
+<text x="310" y="336" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Start a trip</text>
+<text x="598" y="336" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Trip name; currency</text>
+<text x="886" y="336" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Shared group link</text>
+<text x="1174" y="323" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Create trip; lock</text>
+<text x="1174" y="355" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">choice</text>
+<text x="1462" y="323" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Result and vote</text>
+<text x="1462" y="355" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">tally</text>
+<line x1="68" y1="410" x2="1720" y2="410" stroke="#dce6ed" stroke-width="2"/>
+<rect x="68" y="410" width="1652" height="130" fill="#ffffff"/>
+<rect x="68" y="410" width="6" height="130" fill="#1687a8"/>
+<text x="94" y="463" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="start">Four friends</text>
+<text x="94" y="493" fill="#687b8e" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="start">Participants</text>
+<text x="310" y="466" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Open group link</text>
+<text x="598" y="453" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Origin; dates;</text>
+<text x="598" y="485" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">budget</text>
+<text x="886" y="466" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Likes; dealbreakers</text>
+<text x="1174" y="453" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Join; edit</text>
+<text x="1174" y="485" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">privately; vote</text>
+<text x="1462" y="453" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Options and</text>
+<text x="1462" y="485" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">positions</text>
+<line x1="68" y1="540" x2="1720" y2="540" stroke="#dce6ed" stroke-width="2"/>
+<rect x="68" y="540" width="1652" height="130" fill="#f5f9fb"/>
+<rect x="68" y="540" width="6" height="130" fill="#1687a8"/>
+<text x="94" y="593" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="start">Trip Planner</text>
+<text x="94" y="623" fill="#687b8e" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="start">App</text>
+<text x="310" y="596" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Responses complete</text>
+<text x="598" y="596" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Preferences; votes</text>
+<text x="886" y="583" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Hard constraints;</text>
+<text x="886" y="615" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">offers</text>
+<text x="1174" y="596" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Check; rank; tally</text>
+<text x="1462" y="583" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Options or</text>
+<text x="1462" y="615" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">conflicts</text>
+<line x1="68" y1="670" x2="1720" y2="670" stroke="#dce6ed" stroke-width="2"/>
+<rect x="68" y="670" width="1652" height="130" fill="#ffffff"/>
+<rect x="68" y="670" width="6" height="130" fill="#63a295"/>
+<text x="94" y="723" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="start">Gemini</text>
+<text x="94" y="753" fill="#687b8e" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="start">AI service</text>
+<text x="310" y="726" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Candidate request</text>
+<text x="598" y="726" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Group preferences</text>
+<text x="886" y="713" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Dates; destination</text>
+<text x="886" y="745" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">types</text>
+<text x="1174" y="726" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Suggest; explain</text>
+<text x="1462" y="713" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Structured</text>
+<text x="1462" y="745" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">candidates</text>
+<line x1="68" y1="800" x2="1720" y2="800" stroke="#dce6ed" stroke-width="2"/>
+<rect x="68" y="800" width="1652" height="130" fill="#f5f9fb"/>
+<rect x="68" y="800" width="6" height="130" fill="#63a295"/>
+<text x="94" y="853" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="start">Supabase</text>
+<text x="94" y="883" fill="#687b8e" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="start">Data store</text>
+<text x="310" y="856" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Read or write</text>
+<text x="598" y="843" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Trips; people;</text>
+<text x="598" y="875" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">rounds</text>
+<text x="886" y="843" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Edits; votes;</text>
+<text x="886" y="875" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">result</text>
+<text x="1174" y="856" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Persist; retrieve</text>
+<text x="1462" y="856" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Current group state</text>
+<line x1="68" y1="930" x2="1720" y2="930" stroke="#dce6ed" stroke-width="2"/>
+<rect x="68" y="930" width="1652" height="130" fill="#ffffff"/>
+<rect x="68" y="930" width="6" height="130" fill="#63a295"/>
+<text x="94" y="983" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="start">Other API</text>
+<text x="94" y="1013" fill="#687b8e" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="start">Amadeus</text>
+<text x="310" y="986" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Live offer request</text>
+<text x="598" y="973" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Origins; dates;</text>
+<text x="598" y="1005" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">places</text>
+<text x="886" y="986" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Flights; hotels</text>
+<text x="1174" y="986" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Fetch live quotes</text>
+<text x="1462" y="973" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">Prices; links;</text>
+<text x="1462" y="1005" fill="#26364a" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" text-anchor="start">times</text>
+<line x1="68" y1="1060" x2="1720" y2="1060" stroke="#dce6ed" stroke-width="2"/>
+<line x1="290" y1="280" x2="290" y2="1060" stroke="#e3ebf0" stroke-width="2"/>
+<line x1="578" y1="280" x2="578" y2="1060" stroke="#e3ebf0" stroke-width="2"/>
+<line x1="866" y1="280" x2="866" y2="1060" stroke="#e3ebf0" stroke-width="2"/>
+<line x1="1154" y1="280" x2="1154" y2="1060" stroke="#e3ebf0" stroke-width="2"/>
+<line x1="1442" y1="280" x2="1442" y2="1060" stroke="#e3ebf0" stroke-width="2"/>
+<line x1="1720" y1="280" x2="1720" y2="1060" stroke="#e3ebf0" stroke-width="2"/>
+<text x="72" y="1120" fill="#46758a" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="start">FLOW</text>
+<text x="72" y="1158" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600" text-anchor="start">People → App</text>
+<text x="390" y="1158" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600" text-anchor="start">App ↔ Supabase</text>
+<text x="735" y="1158" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600" text-anchor="start">App ↔ Gemini</text>
+<text x="1045" y="1158" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600" text-anchor="start">App ↔ Amadeus</text>
+<text x="1400" y="1158" fill="#162840" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600" text-anchor="start">Results → people</text>
+<line x1="72" y1="1180" x2="1718" y2="1180" stroke="#dfe8ee" stroke-width="2"/>
+<text x="72" y="1211" fill="#63768a" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" text-anchor="start">Amadeus supplies live flight and hotel offers; the app verifies feasibility and shows quote times.</text>
+</svg>

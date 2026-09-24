@@ -1,0 +1,30 @@
+# Gather: group trip planner
+
+Create a trip, share its unique group link, and let any number of friends join. Every member receives a private edit link. Once everyone has submitted, the organiser can request a recommendation round, the group can vote, and the organiser can lock a choice. Previous rounds remain stored.
+
+## Stack
+
+- Next.js 16 and TypeScript
+- Supabase PostgREST for persistent trips, members, rounds, options, and votes
+- Gemini structured JSON for destination candidates and short explanations
+- Amadeus production flight and hotel APIs for live estimates
+
+All keys stay in server environment variables. The public group link lets anyone join and see names, response progress, options, and vote totals. A member's private fragment link is required to edit their response or vote. The organiser's private fragment link is required to generate rounds and lock a choice. Keep private links out of public channels.
+
+## Set up
+
+1. Create a Supabase project and run [`supabase/schema.sql`](supabase/schema.sql) in its SQL editor.
+2. Set the variables listed in [`.env.example`](.env.example) locally and in Vercel project settings. Use a new `sb_secret_` Supabase key if possible. The legacy service role key also works through `SUPABASE_SERVICE_ROLE_KEY`.
+3. Use Amadeus **production** credentials with access to flight offers, hotel list, and hotel offers. The old Self-Service portal was decommissioned in July 2026, so confirm that your account still has working production access before promising live offers.
+4. Run `npm ci`, `npm test`, `npm run typecheck`, and `npm run build`.
+5. Deploy with `vercel --prod` after linking the Vercel project and setting the runtime variables. Verify a five-member flow on the resulting URL.
+
+No fake prices are used. A round reports a date conflict, unavailable offer, or provider error when it cannot verify a candidate. Budget checks use one round-trip flight per person plus an equal share of the quoted hotel total. Destination type influences compatibility; dates, per-person budget, and explicitly excluded destinations are enforced in code. Other free-text dealbreakers inform Gemini's suggestions and should be checked by the group before booking. Provider links open comparison searches, whose prices may differ from the stored quote.
+
+## Form 2
+
+- One-page component map: [`artifacts/form-2-component-map.png`](artifacts/form-2-component-map.png)
+- Editable source: [`artifacts/form-2-component-map.svg`](artifacts/form-2-component-map.svg)
+- Exact first Claude Code prompt: [`artifacts/form-2-first-claude-code-prompt.txt`](artifacts/form-2-first-claude-code-prompt.txt)
+
+The Form 2 prompt retains the original five-person wording as requested. The implemented app follows the later requirement: anyone with the unique link can join.
