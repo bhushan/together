@@ -63,8 +63,13 @@ test('five people can join, edit, resolve a conflict, vote, lock, and keep prior
     const chosen = ready.round.options[0].id;
     for (const memberToken of tokens) assert.equal((await post(created.slug, 'vote', memberToken, { optionId: chosen })).status, 200);
     assert.equal((await get(created.slug)).round.tally[chosen], 5);
+    const alternate = ready.round.options[1].id;
+    assert.equal((await post(created.slug, 'vote', tokens[1], { optionId: alternate })).status, 200);
+    assert.equal((await get(created.slug)).round.tally[chosen], 4);
+    assert.equal((await post(created.slug, 'vote', tokens[1], { optionId: chosen })).status, 200);
     assert.equal((await post(created.slug, 'lock', tokens[0], { optionId: chosen })).status, 200);
     assert.equal((await get(created.slug)).round.locked_option_id, chosen);
+    assert.equal((await post(created.slug, 'vote', tokens[1], { optionId: alternate })).status, 400);
     failOffers = true;
     assert.equal((await post(created.slug, 'generate', tokens[0])).status, 200);
     const failed = await get(created.slug);

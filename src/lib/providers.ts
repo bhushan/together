@@ -7,7 +7,7 @@ function required(name: string) {
 }
 
 export async function suggestCandidates(members: MemberInput[], dates: { startDate: string; endDate: string }): Promise<Candidate[]> {
-  const prompt = `Suggest 5 distinct real travel destinations with valid three-letter destination airport IATA codes. Return only JSON. Group dates: ${dates.startDate} to ${dates.endDate}. Group preferences: ${JSON.stringify(members.map(m => ({ origin: m.origin, budget: m.budget, destinationType: m.destinationType, preferences: m.preferences, dealbreakers: m.dealbreakers, excludedDestinations: m.excludedDestinations })))}. Avoid every excluded destination and dealbreaker. No prices. Keep reason under 140 characters. Types must be one of beach, city, nature, adventure, culture.`;
+  const prompt = `Suggest 5 distinct real travel destinations with valid three-letter IATA city codes usable for both flight and hotel search. Return only JSON. Group dates: ${dates.startDate} to ${dates.endDate}. Group preferences: ${JSON.stringify(members.map(m => ({ origin: m.origin, budget: m.budget, destinationType: m.destinationType, preferences: m.preferences, dealbreakers: m.dealbreakers, excludedDestinations: m.excludedDestinations })))}. Avoid every excluded destination and dealbreaker. No prices. Keep reason under 140 characters. Types must be one of beach, city, nature, adventure, culture.`;
   const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-goog-api-key': required('GEMINI_API_KEY') },
