@@ -2,6 +2,8 @@
 
 Create a trip, share its unique group link, and let any number of friends join. Every member receives a private edit link. Once everyone has submitted, the organiser can request a recommendation round, the group can vote, and the organiser can lock a choice. Previous rounds remain stored.
 
+Live app: [together-bhushan.vercel.app](https://together-bhushan.vercel.app). The previous trip-planner URL redirects here and preserves trip paths.
+
 ## Stack
 
 - Next.js 16 and TypeScript
@@ -18,6 +20,8 @@ All keys stay in server environment variables. The public group link lets anyone
 3. Add a free SerpApi API key as `SERPAPI_API_KEY`. The free plan includes 250 searches per month; each destination uses one hotel search plus one round-trip flight search per distinct origin, up to three destinations per round. No payment method is needed for the free plan. Use a Gemini API key on its free tier.
 4. Run `npm ci`, `npm test`, `npm run typecheck`, and `npm run build`.
 5. Deploy with `vercel --prod` after linking the Vercel project and setting the runtime variables. Verify a multi-member flow on the resulting URL.
+
+For this deployment, Supabase is connected and the schema is applied. The Vercel project is `together`. If a SerpApi request returns HTTP 401, replace `SERPAPI_API_KEY` with the value from the [SerpApi API key page](https://serpapi.com/manage-api-key) and redeploy; Vercel does not apply changed environment variables to an existing deployment.
 
 No fake prices are used. A round reports a date conflict, unavailable offer, or provider error when it cannot verify a candidate. Budget checks use one round-trip flight per person plus an equal share of the quoted hotel total. Destination type influences compatibility; dates, per-person budget, and explicitly excluded destinations are enforced in code. Other free-text dealbreakers inform Gemini's suggestions and should be checked by the group before booking. Provider links open comparison searches, whose prices may differ from the stored quote.
 
