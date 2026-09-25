@@ -35,10 +35,10 @@ export function assessCandidate(candidate: Candidate, members: MemberInput[], qu
     const cost = quote ? (quote.flightPrices[member.id] ?? Infinity) + quote.hotelTotal / members.length : Infinity;
     if (blocked) issues.push(`${member.name} excluded ${candidate.city} or ${candidate.country}.`);
     if (!Number.isFinite(cost)) issues.push(`No live flight price for ${member.name}.`);
-    if (cost > member.budget) issues.push(`${member.name}'s estimated cost exceeds their budget.`);
+    if (Number.isFinite(cost) && cost > member.budget) issues.push(`${member.name}'s estimated cost exceeds their budget.`);
     const typeMatch = member.destinationType === 'any' || member.destinationType.toLowerCase() === candidate.type.toLowerCase();
-    const score = blocked || cost > member.budget ? 0 : typeMatch ? 100 : 65;
-    return { memberId: member.id, name: member.name, cost: Number.isFinite(cost) ? Math.round(cost) : null, budget: member.budget, score, position: blocked ? 'Excluded destination' : cost > member.budget ? 'Over budget' : typeMatch ? 'Preferred style' : 'Different style' };
+    const score = blocked || !Number.isFinite(cost) || cost > member.budget ? 0 : typeMatch ? 100 : 65;
+    return { memberId: member.id, name: member.name, cost: Number.isFinite(cost) ? Math.round(cost) : null, budget: member.budget, score, position: blocked ? 'Excluded destination' : !Number.isFinite(cost) ? 'Price unavailable' : cost > member.budget ? 'Over budget' : typeMatch ? 'Preferred style' : 'Different style' };
   });
   const score = Math.round(positions.reduce((sum, x) => sum + x.score, 0) / positions.length);
   const totalCost = quote ? Object.values(quote.flightPrices).reduce((a, b) => a + b, 0) + quote.hotelTotal : Infinity;

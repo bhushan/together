@@ -27,7 +27,9 @@ async function search(params: Record<string, string>) {
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
   url.searchParams.set('api_key', required('SERPAPI_API_KEY'));
   const response = await fetch(url, { cache: 'no-store', signal: AbortSignal.timeout(20000) });
-  if (!response.ok) throw new Error(`SerpApi returned ${response.status}. Check the free-plan quota or try later.`);
+  if (response.status === 401) throw new Error('SerpApi rejected the API key. Check SERPAPI_API_KEY in Vercel and redeploy.');
+  if (response.status === 429) throw new Error('SerpApi free-plan search limit reached. Try again after the limit resets.');
+  if (!response.ok) throw new Error(`SerpApi returned ${response.status}. Try again later.`);
   const data = await response.json();
   if (data.error) throw new Error(`SerpApi search failed: ${String(data.error).slice(0, 180)}`);
   return data;

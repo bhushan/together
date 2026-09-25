@@ -30,6 +30,8 @@ test('candidate cannot pass excluded destination or personal budget', () => {
 test('missing live prices cannot become a feasible option', () => {
   const result = assessCandidate({ city: 'Bali', country: 'Indonesia', iata: 'DPS', type: 'beach', reason: '' }, members, null);
   assert.equal(result.feasible, false);
+  assert.deepEqual(result.issues, ['Live flight or hotel price unavailable.', 'No live flight price for Riya.', 'No live flight price for Sam.']);
+  assert.equal(result.positions[0].position, 'Price unavailable');
 });
 
 test('ranking favors group compatibility then price', () => {
