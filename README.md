@@ -10,8 +10,28 @@ Live app: [together-bhushan.vercel.app](https://together-bhushan.vercel.app). Th
 - Supabase PostgREST for persistent trips, members, rounds, options, and votes
 - Gemini 3.5 Flash-Lite free tier with structured JSON for destination candidates and short explanations
 - SerpApi Google Flights and Hotels APIs for live estimates (free plan)
+- GSAP for the hero sequence and for the motion that answers an action
+- Fraunces and Instrument Sans, self-hosted through `next/font`
 
 All keys stay in server environment variables. The public group link lets anyone join and see names, response progress, options, and vote totals. A member's private fragment link is required to edit their response or vote. The organiser's private fragment link is required to generate rounds and lock a choice. Keep private links out of public channels.
+
+## Design
+
+The palette is close to monochrome on purpose: deep teal ink (`#0c1e22`) on pale sage (`#e7ebe7`), with aged brass (`#b8893b`) as the only saturated colour in the interface. Everything that carries real colour is either a photograph or a generated horizon, so the chrome never competes with the places it is describing. Tokens live at the top of [`src/app/styles.css`](src/app/styles.css).
+
+Fraunces sets anything display-sized and Instrument Sans does the working text, forms and figures. Both are self-hosted by `next/font`, so there is no render-blocking stylesheet from a font host and no layout shift when they land.
+
+### Motion
+
+There is one orchestrated entrance, on the home hero, plus a slow parallax as it scrolls away. Everything else moves only in answer to something a person did: the readiness meter fills when someone answers, options are dealt out when a round is generated, and the brass marker sweeps across the winner when the organiser locks a choice.
+
+No entry state is set in CSS. Animations are written as GSAP `from` tweens applied before paint, so a visitor with JavaScript off, or with reduced motion on, sees the finished layout rather than a page waiting for an entrance that never arrives. `useMotion` in [`src/lib/motion.ts`](src/lib/motion.ts) scopes every tween to a `gsap.context` and reverts it on cleanup.
+
+### Imagery
+
+Two photographs ship with the app, in [`src/assets/img`](src/assets/img). They are imported rather than served from `public/`, so they are content-hashed, immutable-cached, and re-encoded to AVIF or WebP by the Next image optimiser at the size each viewport needs. Only the home hero is preloaded; it is the LCP element. Both carry a build-time blur placeholder, and both sit in fixed-ratio boxes so nothing shifts as they load. Source: Unsplash (Lago di Braies, and layered ridges), used under the Unsplash License.
+
+Destinations are generated at runtime, so there is no photograph that can honestly be attached to one. Each option instead gets a horizon drawn from its own name: [`src/lib/motif.ts`](src/lib/motif.ts) hashes the destination into a palette scheme, a waterline, a sun and a set of ridges, and [`src/components/horizon.tsx`](src/components/horizon.tsx) renders it as inline SVG. The same place always looks the same, nothing is fetched, and no destination is ever illustrated with a picture of somewhere else.
 
 ## Set up
 
