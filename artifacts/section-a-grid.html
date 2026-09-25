@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Section A · Together group trip planner</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #ffffff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+  .sheet { width: 1600px; }
+
+  .banner {
+    background: #1a1a1a;
+    color: #ffffff;
+    text-align: center;
+    padding: 24px 16px;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+
+  th.corner { width: 252px; border: 0; }
+  th.head {
+    padding: 26px 12px 22px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #1a1a1a;
+    border: 0;
+  }
+
+  tr.rule td { height: 0; padding: 0; border: 0; }
+  .dotline { position: relative; }
+  .dotline td { border-top: 1px solid #c9c9c9; height: 1px; padding: 0; }
+  .dotline td.dotcell { position: relative; }
+  .dotline td.dotcell::after {
+    content: "";
+    position: absolute;
+    left: 50%; top: 0;
+    width: 15px; height: 15px;
+    margin: -7.5px 0 0 -7.5px;
+    border-radius: 50%;
+    background: #1e9e6a;
+  }
+  .dotline td.blank { border-top: 0; }
+
+  td {
+    border: 1px solid #ededed;
+    vertical-align: top;
+    padding: 18px 18px 20px;
+  }
+  td.actor {
+    border-left: 0;
+    text-align: center;
+    vertical-align: middle;
+    padding: 18px 14px;
+  }
+  td.actor .name {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+  }
+  td.actor .role {
+    display: block;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #8a8a8a;
+  }
+  td.actor .tech {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: #1e9e6a;
+    font-weight: 700;
+  }
+  td:last-child { border-right: 0; }
+
+  .lede {
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 9px;
+  }
+  ul { list-style: none; }
+  li {
+    position: relative;
+    padding-left: 13px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #3d3d3d;
+    margin-bottom: 6px;
+  }
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 8px;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #c4c4c4;
+  }
+  li:last-child { margin-bottom: 0; }
+  code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    background: #f4f4f4;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #1a1a1a;
+  }
+  .flag { color: #1e9e6a; font-weight: 700; }
+  .stop { color: #b4453a; font-weight: 700; }
+
+  .footnote {
+    border-top: 1px solid #ededed;
+    padding: 18px 24px 26px;
+    font-size: 13px;
+    color: #8a8a8a;
+    line-height: 1.6;
+  }
+  .footnote strong { color: #3d3d3d; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="banner">SECTION A &middot; GROUP TRIP PLANNER (TOGETHER)</div>
+
+  <table>
+    <colgroup>
+      <col style="width:252px"><col style="width:269px"><col style="width:269px">
+      <col style="width:270px"><col style="width:270px"><col style="width:270px">
+    </colgroup>
+
+    <tr>
+      <th class="corner"></th>
+      <th class="head">TRIGGER</th>
+      <th class="head">INPUT</th>
+      <th class="head">CONTEXT</th>
+      <th class="head">PROCESSING</th>
+      <th class="head">OUTPUT</th>
+    </tr>
+
+    <tr class="dotline">
+      <td class="blank"></td>
+      <td class="dotcell"></td><td class="dotcell"></td><td class="dotcell"></td>
+      <td class="dotcell"></td><td class="dotcell"></td>
+    </tr>
+
+    <!-- RIYA -->
+    <tr>
+      <td class="actor">
+        <div class="name">RIYA<span class="role">(Coordinator)</span><span class="tech">ORGANISER LINK</span></div>
+      </td>
+      <td>
+        <div class="lede">Starts the trip, then calls the round.</div>
+        <ul>
+          <li>Opens Together and creates a trip</li>
+          <li>Later: taps <em>Generate options</em> once the board reads <span class="flag">n / n ready</span></li>
+          <li>Taps <em>Lock group choice</em> when the group has voted</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Three fields, nothing more.</div>
+        <ul>
+          <li>Trip name (80 chars max)</li>
+          <li>Her own name</li>
+          <li>Currency as a 3-letter code, e.g. <code>INR</code></li>
+          <li>On lock: the winning option id</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Holds the only organiser key.</div>
+        <ul>
+          <li>Private fragment link <code>#organizer=…</code>, never sent to the server in a URL</li>
+          <li>Sees live submit progress and who is still WAITING</li>
+          <li>Sees earlier rounds and what each one locked</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Server checks her role, not her word.</div>
+        <ul>
+          <li><code>POST /api/trips</code> mints a slug plus an organiser token</li>
+          <li>Token is SHA-256 hashed and matched against <code>organizer_token_hash</code></li>
+          <li><span class="stop">Blocked</span> if fewer than 2 members or anyone has not submitted</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">One link that opens the whole thing.</div>
+        <ul>
+          <li>Public group link <code>/trip/&lt;slug&gt;</code> to share</li>
+          <li>Her own private edit link</li>
+          <li>A ready round, or a conflict with reasons</li>
+          <li>The locked group choice, kept in history</li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- FRIENDS -->
+    <tr>
+      <td class="actor">
+        <div class="name">FRIENDS<span class="role">(x 4, or any number)</span><span class="tech">MEMBER LINK</span></div>
+      </td>
+      <td>
+        <div class="lede">The shared link lands in the chat.</div>
+        <ul>
+          <li>Opens <code>/trip/&lt;slug&gt;</code> and joins by name</li>
+          <li>Returns via their private link to edit an answer</li>
+          <li>Votes when a round goes ready</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">One short form each.</div>
+        <ul>
+          <li>Origin airport code, e.g. <code>DEL</code></li>
+          <li>Earliest departure, latest return</li>
+          <li>Budget per person</li>
+          <li>Destination style: beach, city, nature, adventure, culture, or open</li>
+          <li>Excluded destinations, likes, dealbreakers</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Private answers, public progress.</div>
+        <ul>
+          <li>Private fragment link <code>#member=…</code> is the only way back in</li>
+          <li>Form reloads prefilled with their saved answer</li>
+          <li>Everyone sees names, READY or WAITING, options and vote totals</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Validated before anything is stored.</div>
+        <ul>
+          <li><code>join</code> rejects a duplicate name in the group</li>
+          <li><code>submit</code> enforces a real IATA code, a real date range and a budget above zero</li>
+          <li><code>vote</code> upserts on (round, member), so a vote can change until lock</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Their place in every option.</div>
+        <ul>
+          <li>Preferences saved, plus their private edit link</li>
+          <li>Per-option position: preferred style, different style, over budget, excluded or price unavailable</li>
+          <li>Their own cost against their own budget</li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- APP -->
+    <tr>
+      <td class="actor">
+        <div class="name">TRIP PLANNER<br/>APP<span class="role">(Next.js 16 on Vercel)</span><span class="tech">SERVER ROUTES</span></div>
+      </td>
+      <td>
+        <div class="lede">Every request to the trip route.</div>
+        <ul>
+          <li><code>GET /api/trips/[slug]</code> on each page load</li>
+          <li><code>POST</code> with one action: join, submit, generate, vote, lock</li>
+          <li>Round work runs up to 60s of server time</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Action plus proof of identity.</div>
+        <ul>
+          <li>JSON body with the action and its payload</li>
+          <li><code>x-member-token</code> header carrying the secret from the link fragment</li>
+          <li>Stored rows for the trip, its members, rounds, options and votes</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">The whole group state, per request.</div>
+        <ul>
+          <li>Shared date window: latest start against earliest end, at least one night</li>
+          <li>Hard limits: budgets, excluded destinations, date range</li>
+          <li>Staleness: has anyone joined or edited since this round</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Where the group maths happens.</div>
+        <ul>
+          <li>Hash the token to resolve member and organiser role</li>
+          <li>Score each candidate per person: 100 preferred style, 65 different style, 0 if blocked, over budget or unpriced</li>
+          <li>Rank by group fit, break ties on total cost, keep the top 3</li>
+          <li>Tally votes; refuse voting or locking on a stale round</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">One JSON state the page renders.</div>
+        <ul>
+          <li>Ready round: up to 3 options with fit %, costs and per-person positions</li>
+          <li>Conflict round: a plain list of what stopped it</li>
+          <li>Member roster, vote tally, previous rounds</li>
+          <li><span class="stop">No fake prices, ever</span></li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- GEMINI -->
+    <tr>
+      <td class="actor">
+        <div class="name">GEMINI<span class="role">(LLM)</span><span class="tech">3.5 FLASH-LITE, FREE TIER</span></div>
+      </td>
+      <td>
+        <div class="lede">Called once per round.</div>
+        <ul>
+          <li>Only after the organiser starts a round</li>
+          <li>Only if the group has a shared window of at least one night</li>
+          <li>Skipped entirely on a date conflict</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">The group, summarised.</div>
+        <ul>
+          <li>Shared start and end date</li>
+          <li>Per member: origin, budget, style, likes, dealbreakers, exclusions</li>
+          <li>Explicit instruction to avoid every exclusion and dealbreaker</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Boxed in by a schema.</div>
+        <ul>
+          <li><code>responseMimeType: application/json</code> with a required JSON schema</li>
+          <li>Type must be one of the five styles; reason under 140 chars</li>
+          <li>20s timeout, no caching</li>
+          <li>Told to return no prices</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Suggests, never decides.</div>
+        <ul>
+          <li>Proposes 3 distinct real destinations with valid city IATA codes</li>
+          <li>Writes one short reason per destination</li>
+          <li>App discards anything failing the <code>^[A-Z]{3}$</code> code check</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Candidates only.</div>
+        <ul>
+          <li><code>{ city, country, iata, type, reason }</code> x 3</li>
+          <li>Feeds price checking and scoring, which it has no say in</li>
+          <li>A model error surfaces as a readable message, not a blank screen</li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- SUPABASE -->
+    <tr>
+      <td class="actor">
+        <div class="name">SUPABASE<span class="role">(Database)</span><span class="tech">POSTGREST, SERVER ONLY</span></div>
+      </td>
+      <td>
+        <div class="lede">Every read and write in the flow.</div>
+        <ul>
+          <li>Trip creation, join, submit, round, vote, lock</li>
+          <li>Page load reads the current state</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Five tables.</div>
+        <ul>
+          <li><code>trips</code>, <code>members</code>, <code>rounds</code>, <code>options</code>, <code>votes</code></li>
+          <li>Hashed tokens only, never the secret itself</li>
+          <li>Quotes and per-person positions stored as JSON</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Closed by default.</div>
+        <ul>
+          <li>RLS on every table; <code>anon</code> and <code>authenticated</code> revoked</li>
+          <li>Reached only from the server with a secret key</li>
+          <li>Unique (trip, name); cascade deletes from the trip down</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Persist and retrieve.</div>
+        <ul>
+          <li>Insert trip, member and round rows; patch a member on submit</li>
+          <li>Vote upsert keyed on (round, member): one live vote each</li>
+          <li>Options returned ordered by score, then cost</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">The group state that survives.</div>
+        <ul>
+          <li>Anyone can reopen the link days later and see the same thing</li>
+          <li>Every earlier round and its locked choice stays readable</li>
+          <li>A new round never overwrites the last one</li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- SERPAPI -->
+    <tr>
+      <td class="actor">
+        <div class="name">SERPAPI<span class="role">(Google Flights + Hotels)</span><span class="tech">IN USE, NOT OPTIONAL</span></div>
+      </td>
+      <td>
+        <div class="lede">Once per candidate destination.</div>
+        <ul>
+          <li>Runs inside a round, right after Gemini answers</li>
+          <li>Candidates checked two at a time to stay inside the free plan</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Real search parameters.</div>
+        <ul>
+          <li>Hotels: city, check-in and check-out, group size, trip currency</li>
+          <li>Flights: one round-trip search per distinct origin to the candidate IATA</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">A free plan with real limits.</div>
+        <ul>
+          <li>250 searches a month: 1 hotel + 1 flight per origin, per destination</li>
+          <li>20s timeout per call</li>
+          <li>401 and 429 are turned into plain instructions, not stack traces</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">Cheapest verified offer wins.</div>
+        <ul>
+          <li>Lowest total hotel rate for the whole stay</li>
+          <li>Cheapest round-trip fare per origin; same-city origin costs zero</li>
+          <li>Any missing leg voids the candidate rather than guessing</li>
+        </ul>
+      </td>
+      <td>
+        <div class="lede">A quote, or an honest gap.</div>
+        <ul>
+          <li>Flight price per member, hotel name and total, quote timestamp</li>
+          <li>Compare links back to Google Flights and Hotels</li>
+          <li>Or: <span class="stop">"no complete flight and hotel prices for &lt;city&gt;"</span>, shown as a round issue</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+
+  <div class="footnote">
+    <strong>Budget rule:</strong> one round-trip fare per person plus an equal share of the quoted hotel total, checked against that person's own budget.
+    <strong>Enforced in code, not by the model:</strong> shared dates, per-person budget and excluded destinations.
+    Free-text dealbreakers only shape what Gemini suggests, so the group should still read them before booking.
+  </div>
+
+</div>
+</body>
+</html>
