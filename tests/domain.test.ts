@@ -20,6 +20,15 @@ test('submission rejects invalid dates, budget, and origin code', () => {
   assert.equal(validateSubmission(members[0]).ok, true);
 });
 
+test('submission rejects a code with no scheduled airport and suggests one for the city', () => {
+  assert.deepEqual(validateSubmission({ ...members[0], origin: 'MUM' }), { ok: false, error: "MUM isn't an airport code. Did you mean BOM (Mumbai)?" });
+  assert.deepEqual(validateSubmission({ ...members[0], origin: 'QQQ' }), { ok: false, error: "QQQ isn't an airport code. Enter the three-letter code of the airport you fly from, such as DEL." });
+  assert.equal(validateSubmission({ ...members[0], origin: 'LON' }).error, "LON isn't an airport code. Did you mean LHR (London)?");
+  assert.equal(validateSubmission({ ...members[0], origin: 'PAR' }).error, "PAR isn't an airport code. Did you mean CDG (Paris)?");
+  assert.equal(validateSubmission({ ...members[0], origin: 'BLR' }).ok, true);
+  assert.equal(validateSubmission({ ...members[0], origin: 'AUS' }).ok, true);
+});
+
 test('candidate cannot pass excluded destination or personal budget', () => {
   const quote = { flightPrices: { a: 300, b: 450 }, hotelTotal: 300, currency: 'USD', quotedAt: '2026-09-24T00:00:00Z', hotelName: 'Test Hotel', flightLinks: {}, hotelLink: '' };
   assert.equal(assessCandidate({ city: 'Goa', country: 'India', iata: 'GOI', type: 'beach', reason: '' }, members, quote).feasible, false);

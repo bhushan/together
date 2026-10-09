@@ -87,7 +87,7 @@ export async function POST(request: Request, context: Params) {
         const batch = await Promise.all(candidates.slice(index, index + 2).map(async candidate => {
           const { quote, error } = await liveQuote(candidate, inputs, dates, trip.currency);
           const result = assessCandidate(candidate, inputs, quote);
-          return { candidate, quote, ...result, issues: error ? [error, ...result.issues] : result.issues };
+          return { candidate, quote, ...result, issues: error ? [error] : result.issues };
         }));
         assessed.push(...batch);
       }
