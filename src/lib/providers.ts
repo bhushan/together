@@ -44,7 +44,8 @@ export async function liveQuote(candidate: Candidate, members: MemberInput[], da
     const origins = [...new Set(members.map(m => m.origin))];
     const [hotelResult, ...flightResults] = await Promise.all([
       search({ engine: 'google_hotels', q: `Hotels in ${candidate.city}, ${candidate.country}`, check_in_date: dates.startDate, check_out_date: dates.endDate, adults: String(members.length), currency }),
-      ...origins.map(origin => origin === candidate.iata ? Promise.resolve(null) : search({ engine: 'google_flights', departure_id: origin, arrival_id: candidate.iata, outbound_date: dates.startDate, return_date: dates.endDate, type: '1', adults: '1', currency })),
+      ...origins.map(origin => origin === candidate.iata ? Promise.resolve(null) : search({ engine: 'google_flights', departure_id: origin, arrival_id: candidate.iata, outbound_date: dates.startDate, return_date: dates.endDate, type: '1', adults: '1', currency })
+        .catch(error => { if (error instanceof Error && error.message.includes("hasn't returned any results")) return null; throw error; })),
     ]);
     const hotels = (hotelResult.properties || [] as Hotel[])
       .map((hotel: Hotel) => ({ name: hotel.name || 'Hotel', price: hotel.total_rate?.extracted_lowest }))
@@ -56,7 +57,9 @@ export async function liveQuote(candidate: Candidate, members: MemberInput[], da
       const prices = [...(result?.best_flights || []), ...(result?.other_flights || [])].map((flight: Flight) => flight.price).filter(positive);
       return [origin, prices.length ? Math.min(...prices) : NaN] as const;
     });
-    if (!hotels.length || flights.some(([, price]) => !Number.isFinite(price))) return { quote: null, error: `No complete round-trip flight and group hotel prices for ${candidate.city}.` };
+    const unreachable = flights.filter(([, price]) => !Number.isFinite(price)).map(([origin]) => `${origin} (${members.filter(m => m.origin === origin).map(m => m.name).join(', ')})`);
+    if (unreachable.length) return { quote: null, error: `${candidate.city}: no flights found from ${unreachable.join(' or ')}. Check the airport code.` };
+    if (!hotels.length) return { quote: null, error: `${candidate.city}: no group hotel prices for these dates.` };
     const flightPrices = Object.fromEntries(members.map(m => [m.id, flights.find(([origin]) => origin === m.origin)![1]]));
     const flightLinks = Object.fromEntries(members.map(m => [m.id, `https://www.google.com/travel/flights?hl=en&q=${encodeURIComponent(`Flights from ${m.origin} to ${candidate.iata} ${dates.startDate} returning ${dates.endDate}`)}`]));
     return { quote: { flightPrices, hotelTotal: hotels[0].price, currency, quotedAt: new Date().toISOString(), hotelName: hotels[0].name, flightLinks, hotelLink: `https://www.google.com/travel/hotels?q=${encodeURIComponent(`${candidate.city}, ${candidate.country}`)}&checkin=${dates.startDate}&checkout=${dates.endDate}&adults=${members.length}` } };

@@ -1,3 +1,5 @@
+import airports from './airports.json';
+
 export type MemberInput = {
   id: string; name: string; origin: string; startDate: string; endDate: string;
   budget: number; destinationType: string; excludedDestinations: string[];
@@ -6,8 +8,20 @@ export type MemberInput = {
 export type Candidate = { city: string; country: string; iata: string; type: string; reason: string };
 export type Quote = { flightPrices: Record<string, number>; hotelTotal: number; currency: string; quotedAt: string; hotelName: string; flightLinks: Record<string, string>; hotelLink: string };
 
+const cities: Record<string, string> = airports;
+// Metropolitan codes cover several airports and are not valid flight origins; point to the main one.
+const metro: Record<string, string> = { LON: 'LHR', NYC: 'JFK', PAR: 'CDG', TYO: 'HND', ROM: 'FCO', MIL: 'MXP', BJS: 'PEK', SEL: 'ICN', CHI: 'ORD', WAS: 'IAD', OSA: 'KIX', MOW: 'SVO', STO: 'ARN', SAO: 'GRU', BUE: 'EZE', YTO: 'YYZ', JKT: 'CGK', YMQ: 'YUL' };
+
+export function originError(code: string): string | null {
+  if (!/^[A-Z]{3}$/.test(code)) return 'Enter a three-letter airport code, such as DEL.';
+  if (cities[code]) return null;
+  const guess = metro[code] || Object.keys(cities).find(key => cities[key].toUpperCase().startsWith(code));
+  return guess ? `${code} isn't an airport code. Did you mean ${guess} (${cities[guess]})?` : `${code} isn't an airport code. Enter the three-letter code of the airport you fly from, such as DEL.`;
+}
+
 export function validateSubmission(input: MemberInput): { ok: boolean; error?: string } {
-  if (!/^[A-Z]{3}$/.test(input.origin)) return { ok: false, error: 'Enter a three-letter airport code, such as DEL.' };
+  const origin = originError(input.origin);
+  if (origin) return { ok: false, error: origin };
   const realDate = (value: string) => /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`)) && new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value;
   if (!realDate(input.startDate) || !realDate(input.endDate) || input.startDate > input.endDate) return { ok: false, error: 'Choose a valid date range.' };
   if (!Number.isFinite(input.budget) || input.budget <= 0) return { ok: false, error: 'Enter a budget greater than zero.' };
